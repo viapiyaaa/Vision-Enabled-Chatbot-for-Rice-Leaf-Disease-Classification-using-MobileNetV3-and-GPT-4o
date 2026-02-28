@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
   const cancelCameraButton = document.getElementById('cancelCameraButton');
   const hiddenCanvas = document.getElementById('hiddenCanvas');
 
+  const ALLOWED_TYPES = ["image/jpeg", "image/png", "image/jpg"];
+
   let uploadedFile = null;
   let stream = null;
 
@@ -22,54 +24,77 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // Trigger Modal Pilihan
-  uploadBox.addEventListener('click', (e) => {
+  // UPLOAD BOX CLICK
+  uploadBox.addEventListener('click', () => {
     if (stream) return;
 
     Swal.fire({
       title: 'Pilih Metode Unggah',
       html: `
-      <div class="swal2-option-grid">
-        <div class="swal2-option-item" id="swal-opt-camera">
-          <i class="fas fa-camera"></i>
-          <b>Kamera</b>
+        <div class="swal2-option-grid">
+          <div class="swal2-option-item" id="swal-opt-camera">
+            <i class="fas fa-camera"></i>
+            <b>Kamera</b>
+          </div>
+          <div class="swal2-option-item" id="swal-opt-file">
+            <i class="fas fa-file-image"></i>
+            <b>Galeri / File</b>
+          </div>
         </div>
-        <div class="swal2-option-item" id="swal-opt-file">
-          <i class="fas fa-file-image"></i>
-          <b>Galeri/File</b>
-        </div>
-      </div>
-    `,
+      `,
       showConfirmButton: false,
       showCloseButton: true,
       didOpen: () => {
-        const cameraBtn = document.getElementById('swal-opt-camera');
-        const fileBtn = document.getElementById('swal-opt-file');
-
-        cameraBtn.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-          // Tutup modal dulu
+        document.getElementById('swal-opt-camera').onclick = () => {
           Swal.close();
-          // Jalankan kamera setelah modal benar-benar hilang
-          requestAnimationFrame(() => startCamera());
-        });
+          requestAnimationFrame(startCamera);
+        };
 
-        fileBtn.addEventListener('click', (ev) => {
-          ev.stopPropagation();
-
+        document.getElementById('swal-opt-file').onclick = () => {
           Swal.close();
+          imageInput.click();
+          document.querySelector('.swal2-container')?.remove();
 
-          // Tunggu DOM benar-benar repaint
-          setTimeout(() => {
-            // Pastikan container swal benar-benar hilang
-            document.querySelector('.swal2-container')?.remove();
-            imageInput.click();
-          }, 0);
-        });
-      },
+        };
+      }
     });
   });
 
+  imageInput.addEventListener('change', (e) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+
+    const file = e.target.files[0];
+
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      Swal.fire({
+        icon: "error",
+        title: "Format Tidak Didukung",
+        text: "Silakan unggah gambar JPG, JPEG, atau PNG."
+      });
+      imageInput.value = "";
+      return;
+    }
+
+    handleImageUpload(file);
+    imageInput.value = "";
+  });
+
+  // HANDLE IMAGE UPLOAD (SINGLE SOURCE)
+  function handleImageUpload(file) {
+    uploadedFile = file;
+
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      imagePreview.src = e.target.result;
+      imagePreview.style.display = 'block';
+      imagePreview.classList.add('fade-in');
+      uploadPlaceholder.style.display = 'none';
+      detectButton.disabled = false;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  // CAMERA
   async function startCamera() {
     try {
       stream = await navigator.mediaDevices.getUserMedia({
@@ -77,20 +102,17 @@ document.addEventListener('DOMContentLoaded', function () {
         audio: false,
       });
       video.srcObject = stream;
-
+      cameraContainer.style.display = 'flex';
       uploadPlaceholder.style.display = 'none';
       imagePreview.style.display = 'none';
-      imagePreview.classList.remove('fade-in');
-
-      cameraContainer.style.display = 'flex';
-    } catch (err) {
-      Swal.fire('Error', 'Gagal mengakses kamera. Pastikan izin diberikan.', 'error');
+    } catch {
+      Swal.fire('Error', 'Gagal mengakses kamera', 'error');
     }
   }
 
   function stopCamera() {
     if (stream) {
-      stream.getTracks().forEach((track) => track.stop());
+      stream.getTracks().forEach(track => track.stop());
       stream = null;
     }
     cameraContainer.style.display = 'none';
@@ -99,56 +121,24 @@ document.addEventListener('DOMContentLoaded', function () {
   cancelCameraButton.onclick = (e) => {
     e.stopPropagation();
     stopCamera();
-    if (uploadedFile) {
-      imagePreview.style.display = 'block';
-      imagePreview.classList.add('fade-in');
-    } else {
-      uploadPlaceholder.style.display = 'flex';
-    }
+    if (!uploadedFile) uploadPlaceholder.style.display = 'flex';
   };
 
   captureButton.onclick = (e) => {
     e.stopPropagation();
+
     hiddenCanvas.width = video.videoWidth;
     hiddenCanvas.height = video.videoHeight;
-    const ctx = hiddenCanvas.getContext('2d');
-    ctx.drawImage(video, 0, 0);
+    hiddenCanvas.getContext('2d').drawImage(video, 0, 0);
 
-    const dataUrl = hiddenCanvas.toDataURL('image/jpeg');
-
-    fetch(dataUrl)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const file = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
-        handleImageUpload(file);
-        stopCamera();
-      });
+    hiddenCanvas.toBlob((blob) => {
+      const file = new File([blob], 'capture.jpg', { type: 'image/jpeg' });
+      handleImageUpload(file);
+      stopCamera();
+    }, 'image/jpeg');
   };
 
-  imageInput.addEventListener('change', (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      handleImageUpload(file);
-      // Reset input file agar bisa pilih file yang sama lagi jika perlu
-      imageInput.value = '';
-    }
-  });
-
-  function handleImageUpload(file) {
-    if (file && file.type.startsWith('image/')) {
-      uploadedFile = file;
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        imagePreview.src = e.target.result;
-        imagePreview.style.display = 'block';
-        imagePreview.classList.add('fade-in');
-        uploadPlaceholder.style.display = 'none';
-        detectButton.disabled = false;
-      };
-      reader.readAsDataURL(file);
-    }
-  }
-
+  // DETECT BUTTON
   detectButton.addEventListener('click', async () => {
     if (!uploadedFile) return;
 
@@ -161,12 +151,11 @@ document.addEventListener('DOMContentLoaded', function () {
     try {
       const response = await fetch('/detect', {
         method: 'POST',
-        body: formData,
+        body: formData
       });
 
       const result = await response.json();
 
-      // ✅ DETEKSI BERHASIL
       if (response.ok && result.detections) {
         sessionStorage.setItem('detectionResult', JSON.stringify(result));
         sessionStorage.setItem('uploadedImage', imagePreview.src);
@@ -174,46 +163,15 @@ document.addEventListener('DOMContentLoaded', function () {
         Swal.fire({
           icon: 'success',
           title: 'Deteksi Berhasil',
-          text: 'Gambar berhasil dianalisis',
+          text: 'Gambar berhasil diproses'
         }).then(() => {
           window.location.href = '/chatbot';
         });
         return;
       }
 
-      // ⚠️ UNCERTAIN
-      if (result.status === 'UNCERTAIN') {
-        Swal.fire({
-          icon: 'warning',
-          title: 'Gambar Kurang Jelas',
-          text: result.message,
-        });
-        return;
-      }
-
-      // ⚠️ OUT OF SCOPE (THRESHOLD)
-      if (result.status === 'OUT_OF_SCOPE') {
-        Swal.fire({
-          icon: 'info',
-          title: 'Tidak Dapat Diklasifikasikan',
-          text: result.message + ` (Confidence: ${(result.confidence * 100).toFixed(2)}%)`,
-        });
-        return;
-      }
-
-      // ❌ INVALID
-      if (result.status === 'INVALID') {
-        Swal.fire({
-          icon: 'error',
-          title: 'Gambar Tidak Valid',
-          text: result.message,
-        });
-        return;
-      }
-
-      // ❌ FALLBACK ERROR
-      Swal.fire('Error', result.error || 'Terjadi kesalahan', 'error');
-    } catch (error) {
+      Swal.fire('Error', result.error || 'Gambar yang diunggah bukan gambar penyakit daun tanaman padi', 'error');
+    } catch {
       Swal.fire('Error', 'Gagal terhubung ke server', 'error');
     } finally {
       loadingDiv.style.display = 'none';
@@ -221,16 +179,30 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 
+  // DRAG & DROP
   uploadBox.addEventListener('dragover', (e) => {
     e.preventDefault();
     uploadBox.style.borderColor = '#2d6a4f';
   });
+
   uploadBox.addEventListener('dragleave', () => {
     uploadBox.style.borderColor = '#e4e4e4';
   });
+
   uploadBox.addEventListener('drop', (e) => {
     e.preventDefault();
     uploadBox.style.borderColor = '#e4e4e4';
-    handleImageUpload(e.dataTransfer.files[0]);
+
+    const file = e.dataTransfer.files[0];
+    if (!ALLOWED_TYPES.includes(file.type)) {
+      Swal.fire({
+        icon: "error",
+        title: "Format Tidak Didukung",
+        text: "Silakan unggah gambar JPG, JPEG, atau PNG."
+      });
+      return;
+    }
+
+    handleImageUpload(file);
   });
 });

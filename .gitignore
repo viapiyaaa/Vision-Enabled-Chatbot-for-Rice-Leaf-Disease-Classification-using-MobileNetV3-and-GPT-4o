@@ -13,3 +13,5 @@ flask_session/
 
 # testing
 test.py
+
+model/

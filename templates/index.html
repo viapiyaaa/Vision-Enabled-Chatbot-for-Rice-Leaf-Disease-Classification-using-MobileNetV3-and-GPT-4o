@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='index/asset/css/style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename='index/asset/js/script.js') }}" />
   </head>
@@ -55,7 +56,7 @@
     <div class="row align-items-center">
 
       <!-- IMAGE -->
-      <div class="col-lg-6 text-center order-1 order-lg-2">
+      <div class="col-lg-6 text-center order-1 order-lg-2" data-aos="zoom-out" data-aos-delay="400">
         <img src="../static/index/asset/images/robot.png"
              alt="Robot PadiDetect"
              class="img-fluid hero-img" />
@@ -63,17 +64,16 @@
 
       <!-- TEXT -->
       <div class="col-lg-6 order-2 order-lg-1">
-        <h1 class="hero-title">
+        <h1 class="hero-title" data-aos="fade-up">
           Deteksi dan Konsultasi<br />Penyakit Tanaman Padi
         </h1>
-        <p class="hero-text">
-          Dapatkan analisis cepat dan konsultasi langsung melalui Chatbot AI
-          untuk membantu mendeteksi penyakit tanaman padi sejak dini agar
-          hasil panen tetap optimal.
+        <p class="hero-text" data-aos="fade-up" data-aos-delay="100">
+          Dapatkan analisis cepat dan konsultasi langsung melalui Chatbot AI untuk membantu mendeteksi 
+          penyakit daun padi sejak dini agar hasil panen tetap optimal.
         </p>
 
         <div class="d-flex flex-wrap align-items-center gap-3 mt-4 justify-content-lg-start justify-content-center">
-          <button class="btn btn-cta d-flex align-items-center gap-2"
+          <button class="btn btn-cta d-flex align-items-center gap-2" data-aos="fade-up" data-aos-delay="200"
                   onclick="window.location.href='/upload'">
             <i class="fa-solid fa-magnifying-glass"></i>
             Mulai Deteksi Sekarang
@@ -89,17 +89,17 @@
     <section id="tentang" class="tentang">
       <!-- Bagian Header -->
       <div class="header">
-        <h2 class="title">
+        <h2 class="title" data-aos="fade-up">
           Mengapa Perlu Deteksi <br />
-          <span>Penyakit Padi</span> Sejak Dini?
+          <span>Penyakit Daun Padi</span> Sejak Dini?
         </h2>
-        <p class="description">Penyakit daun padi menyebar sangat cepat. Jika tidak segera ditangani, hasil panen bisa menurun drastis atau bahkan gagal total.</p>
+        <p class="description" data-aos="fade-up">Penyakit daun padi jika tidak segera ditangani akan membuat hasil panen bisa menurun drastis atau bahkan gagal total.</p>
       </div>
 
       <!-- Bagian Kartu Edukasi -->
       <div class="grid">
         <!-- Kartu 1 -->
-        <div class="info-card">
+        <div class="info-card" data-aos="fade-up" data-aos-delay="0">
           <div class="icon-box icon-green">
             <!-- Icon Warning/Alert -->
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -111,7 +111,7 @@
         </div>
 
         <!-- Kartu 2 -->
-        <div class="info-card">
+        <div class="info-card" data-aos="fade-up" data-aos-delay="100">
           <div class="icon-box icon-yellow">
             <!-- Icon Cash/Money -->
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -128,7 +128,7 @@
         </div>
 
         <!-- Kartu 3 -->
-        <div class="info-card">
+        <div class="info-card" data-aos="fade-up" data-aos-delay="200">
           <div class="icon-box icon-blue">
             <!-- Icon Check/Ceklis -->
             <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -142,13 +142,13 @@
     </section>
 
     <!-- Cara Menggunakan Section -->
-    <section class="alurkerja">
-      <h2 class="title">Bagaimana <span>Cara Kerjanya?</span></h2>
-      <p class="description">Ikuti langkah mudah untuk mendiagnosis tanaman Anda</p>
+    <section class="alurkerja" >
+      <h2 class="title" data-aos="fade-up">Bagaimana <span>Cara Kerjanya?</span></h2>
+      <p class="description" data-aos="fade-up">Ikuti langkah mudah untuk mendiagnosis tanaman Anda</p>
 
       <div class="steps-wrapper">
         <!-- Langkah 1 -->
-        <div class="step-card">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="0">
           <div class="icon-circle">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z" />
@@ -160,7 +160,7 @@
         </div>
 
         <!-- Panah Penghubung 1 -->
-        <div class="arrow-container">
+        <div class="arrow-container" data-aos="fade-up" data-aos-delay="0">
           <div class="arrow-horizontal">
             <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </div>
@@ -170,19 +170,19 @@
         </div>
 
         <!-- Langkah 2 -->
-        <div class="step-card">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="100">
           <div class="icon-circle">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="11" cy="11" r="8" />
               <path d="m21 21-4.3-4.3" />
             </svg>
           </div>
-          <h3>Hasil Analisis</h3>
-          <p>Dapatkan informasi jenis penyakit tanaman padi Anda.</p>
+          <h3>Diagnosis Sistem</h3>
+          <p>Model Deep Learning akan memproses untuk mendeteksi jenis penyakit daun padi.</p>
         </div>
 
         <!-- Panah Penghubung 2 -->
-        <div class="arrow-container">
+        <div class="arrow-container" data-aos="fade-up" data-aos-delay="100">
           <div class="arrow-horizontal">
             <svg class="arrow-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
           </div>
@@ -192,22 +192,22 @@
         </div>
 
         <!-- Langkah 3 -->
-        <div class="step-card">
+        <div class="step-card" data-aos="fade-up" data-aos-delay="200">
           <div class="icon-circle">
             <svg class="icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
             </svg>
           </div>
           <h3>Tanya Chatbot</h3>
-          <p>Tanyakan cara penanganan yang tepat berdasarkan hasil analisis diagnosis.</p>
+          <p>Hasil diagnosis dikirim langsung ke chatbot. Anda bisa melihat jenis penyakit sekaligus bertanya cara penanganannya secara interaktif.</p>
         </div>
       </div>
     </section>
 
     <section id="artikel" class="artikel-section">
       <div class="container text-center">
-        <h2 class="title">Berita dan Edukasi <span>Penyakit Padi</span></h2>
-        <p>Artikel edukatif mengenai penyakit tanaman padi yang membahas gejala, penyebab, serta langkah pencegahan dan pengendalian.</p>
+        <h2 class="title" data-aos="fade-up">Berita dan Edukasi <span>Penyakit Padi</span></h2>
+        <p data-aos="fade-up">Artikel edukatif mengenai penyakit tanaman padi yang membahas gejala, penyebab, serta langkah pencegahan dan pengendalian.</p>
 
         <div class="slider-wrapper">
           <!-- Tombol Navigasi -->
@@ -218,7 +218,7 @@
           <!-- Slider Area -->
           <div class="article-slider" id="articleSlider">
             <!-- Artikel 1 -->
-            <div class="article-item">
+            <div class="article-item" data-aos="fade-up" data-aos-delay="100">
               <div class="article-card">
                 <img src="https://mitrataniabadi.co.id/wp-content/uploads/2024/07/Penyakit-padi.jpg" alt="Penyakit Padi" />
                 <div class="content">
@@ -229,7 +229,7 @@
             </div>
 
             <!-- Artikel 2 -->
-            <div class="article-item">
+            <div class="article-item" data-aos="fade-up" data-aos-delay="100">
               <div class="article-card">
                 <img src="https://cdn.rri.co.id/berita/Entikong/o/1720876986853-padi/7sx57mknor3pe20.jpeg" alt="Merawat Padi" />
                 <div class="content">
@@ -240,7 +240,7 @@
             </div>
 
             <!-- Artikel 3 -->
-            <div class="article-item">
+            <div class="article-item" data-aos="fade-up" data-aos-delay="100">
               <div class="article-card">
                 <img src="https://digitani.ipb.ac.id/wp-content/uploads/2025/06/hama-tanaman-padi-770x400@2x.png" alt="Hama Padi" />
                 <div class="content">
@@ -251,7 +251,7 @@
             </div>
 
             <!-- Artikel 4 -->
-            <div class="article-item">
+            <div class="article-item" data-aos="fade-up" data-aos-delay="100">
               <div class="article-card">
                 <img src="https://images.unsplash.com/photo-1530507629858-e4977d30e9e0?q=80&w=800&auto=format&fit=crop" alt="Pupuk Padi" />
                 <div class="content">
@@ -262,7 +262,7 @@
             </div>
 
             <!-- Artikel 5 -->
-            <div class="article-item">
+            <div class="article-item" data-aos="fade-up" data-aos-delay="100">
               <div class="article-card">
                 <img src="https://distan.bulelengkab.go.id/uploads/konten/penyakit-tungro-pada-tanaman-padi-dan-cara-pengendaliannya-44.jpg" alt="Irigasi" />
                 <div class="content">
@@ -282,7 +282,7 @@
 
     <section id="faq" class="faq-section">
       <div class="container text-center">
-        <h2 class="title" style="margin-bottom: 50px">Pertanyaan Umum <span>(FAQ)</span></h2>
+        <h2 class="title" style="margin-bottom: 50px" data-aos="fade-up" data-aos-delay="100">Pertanyaan Umum <span>(FAQ)</span></h2>
 
         <div class="accordion" id="faqAccordion">
           <!-- Q1 -->
@@ -292,7 +292,7 @@
             </h2>
             <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                PadiDetect adalah sebuah website yang menggunakan kecerdasan buatan (AI) untuk membantu petani mendeteksi penyakit pada tanaman padi hanya dengan mengunggah foto daun padi yang terinfeksi. Selain itu, kami menyediakan fitur
+                PadiDetect adalah sebuah website yang menggunakan kecerdasan buatan (AI) untuk membantu petani mendeteksi penyakit pada daun padi hanya dengan mengunggah foto daun padi yang terinfeksi. Selain itu, kami menyediakan fitur
                 chatbot untuk konsultasi lebih lanjut.
               </div>
             </div>
@@ -305,7 +305,7 @@
             </h2>
             <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Sistem AI dilatih menggunakan model machine learning (Pembelajaran Mesin) dengan ribuan citra daun padi yang sehat dan terinfeksi. Model ini menganalisis pola visual pada foto yang Anda unggah untuk menentukan jenis penyakit
+                Sistem AI dilatih menggunakan model deep learning (Pembelajaran Mendalam) dengan ribuan citra daun padi yang sehat dan terinfeksi. Model ini menganalisis pola visual pada foto yang Anda unggah untuk menentukan jenis penyakit
                 yang terinfeksi.
               </div>
             </div>
@@ -318,8 +318,7 @@
             </h2>
             <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
               <div class="accordion-body">
-                Meskipun upaya telah dilakukan untuk mencapai akurasi setinggi mungkin, hasil deteksi AI tidak 100% mutlak dan sebaiknya digunakan sebagai referensi awal. Untuk kepastian yang lebih tinggi serta rekomendasi penanganan yang
-                lebih detail, Anda dapat melanjutkan konsultasi dengan Chatbot AI atau berkonsultasi dengan ahli pertanian lokal.
+                PadiDetect menggunakan teknologi AI dengan akurasi pengujian sebesar 98%. Namun, hasil di lapangan sangat bergantung pada kualitas foto dan pencahayaan. Kami menyarankan hasil ini digunakan sebagai referensi awal. Untuk hasil yang lebih pasti, Anda dapat melanjutkan konsultasi melalui Chatbot AI atau menghubungi ahli pertanian setempat guna mendapatkan panduan penanganan yang lebih detail.
               </div>
             </div>
           </div>
@@ -327,10 +326,10 @@
           <!-- Q4 -->
           <div class="accordion-item">
             <h2 class="accordion-header" id="headingFour">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Apakah layanan konsultasi Chatbot berbayar?</button>
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">Apakah PadiDetect bisa mendeteksi semua jenis penyakit padi?</button>
             </h2>
             <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
-              <div class="accordion-body">Tidak, seluruh layanan deteksi dan konsultasi melalui Chatbot AI di PadiDetect saat ini gratis.</div>
+              <div class="accordion-body">Saat ini, PadiDetect difokuskan untuk mengidentifikasi kondisi tanaman padi melalui citra daun, yang mencakup deteksi tanaman Sehat (Healthy) serta empat jenis penyakit utama: Bacterial Blight, Blast, Brownspot, dan Tungro.</div>
             </div>
           </div>
         </div>
@@ -343,38 +342,10 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-      const slider = document.getElementById('articleSlider');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-
-      // Fungsi untuk menggeser slider
-      function scrollSlider(direction) {
-        const itemWidth = slider.querySelector('.article-item').offsetWidth + 20; // Lebar item + gap
-        if (direction === 'next') {
-          slider.scrollLeft += itemWidth;
-        } else {
-          slider.scrollLeft -= itemWidth;
-        }
-      }
-
-      nextBtn.addEventListener('click', () => scrollSlider('next'));
-      prevBtn.addEventListener('click', () => scrollSlider('prev'));
-
-      // Sembunyikan tombol jika tidak bisa scroll lagi (Opsional)
-      slider.addEventListener('scroll', () => {
-        prevBtn.style.opacity = slider.scrollLeft <= 0 ? '0.3' : '1';
-        prevBtn.style.pointerEvents = slider.scrollLeft <= 0 ? 'none' : 'auto';
-
-        const maxScroll = slider.scrollWidth - slider.clientWidth;
-        nextBtn.style.opacity = slider.scrollLeft >= maxScroll - 5 ? '0.3' : '1';
-        nextBtn.style.pointerEvents = slider.scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
-      });
-      // Memanggil ikon Lucide
-      lucide.createIcons();
-      function mulaiDeteksi() {
-        alert('Fitur deteksi akan segera tersedia!');
-      }
-    </script>
+    <script src="{{ url_for('static', filename='index/asset/js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='index/asset/js/main.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
   </body>
 </html>
