@@ -4,6 +4,7 @@ from tensorflow.keras.models import load_model
 from utils.image_processing import allowed_file, prepare_image
 from utils.validation import validate_leaf_rice_image
 from utils.chat import get_chat_response
+http://127.0.0.1:5000
 from config import LABELS
 import numpy as np
 
